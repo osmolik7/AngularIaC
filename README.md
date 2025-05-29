@@ -19,35 +19,34 @@ Este repositorio contiene una configuración completa para levantar un entorno d
    
 
 ## 🛠 Cómo usar
-### 1. **Descarga los archivos:**
-Clona este repositorio o descarga los siguientes archivos manualmente:
-
-- `Dockerfile`  
-- `docker-compose.yml`  
-- `.env`
-
-Abrir el DockerDesktop
-
-### 2. **Modifica el archivo .env** (opcional)
-Puedes cambiar los valores a conveniencia del proyecto, contenedor e imagen.
-```env
-PROJECT_NAME=basicosAngular
-CONTAINER_NAME=basicosAngular
-IMAGEN=angular-dev:1.0
-
-```
-
-### 3. **Construye la imagen:**
-Abre una terminal en la carpeta que descargaste este repositorio.
-Ejecuta el siguiente script, considera que el nombre de la imagen con tag debe ser igual al del archivo .env
-```bash
-docker build -t <nombre-imagen>:<tag> .
-```
-
-### 4. **Inicia el contenedor:**
-```bash
-docker-compose up
-```
-
-### 5. **Abre tu navegador:**
+1. **Descarga los archivos:**
+- Clona este repositorio o descarga los siguientes archivos manualmente:
+  
+  ```text
+  - Dockerfile  
+  - docker-compose.yml` 
+  - .env
+  ```
+2. **Modifica el archivo .env** (opcional)
+- Puedes cambiar los valores a conveniencia del proyecto, contenedor e imagen.
+  
+  ```env
+  PROJECT_NAME=basicosAngular
+  CONTAINER_NAME=basicosAngular
+  IMAGEN=angular-dev:1.0
+  ```
+3. **Construye la imagen:**
+- Abre una terminal en la carpeta que descargaste este repositorio.
+- Ejecuta el siguiente script, considera que el nombre de la imagen con tag debe ser igual al del archivo .env
+  
+  ```bash
+  docker build -t <nombre-imagen>:<tag> .
+  ```
+4. **Inicia el contenedor:**
+- Crea un nuevo contenedor si no existe o bien inicia el que ya se habia creado
+  
+  ```bash
+  docker-compose up
+  ```
+5. **Abre tu navegador:**
 - http://localhost:4500
