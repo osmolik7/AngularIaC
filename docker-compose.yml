@@ -1,0 +1,34 @@
+services:
+  angular-app:
+    build: .
+    image: ${IMAGEN}
+    container_name: ${CONTAINER_NAME}
+    working_dir: /app
+    volumes:
+      - ./${PROJECT_NAME}:/app/${PROJECT_NAME}
+      - /app/${PROJECT_NAME}/node_modules
+    ports:
+      - "4500:4200"
+    env_file:
+      - .env
+    command:
+      - sh
+      - -c
+      - |
+          if [ ! -f /app/${PROJECT_NAME}/angular.json ]; then
+            echo "Creando proyecto Angular ${PROJECT_NAME}..." &&
+            cd /app &&
+            ng new ${PROJECT_NAME} --defaults --skip-git &&
+            cd /app/${PROJECT_NAME} &&
+            npm install &&
+            sha256sum package.json > .packagejson.sha256;
+          else
+            cd /app/${PROJECT_NAME};
+            if [ ! -f .packagejson.sha256 ] || ! sha256sum -c --status .packagejson.sha256; then
+              echo "package.json cambió, instalando dependencias npm..." &&
+              npm install &&
+              sha256sum package.json > .packagejson.sha256;
+            fi;
+          fi &&
+          ng serve --host 0.0.0.0 --port 4200 --poll=2000
+
